@@ -1,4 +1,6 @@
 #From Blog post https://aspyn.com/2026/02/25/windows-finding-and-removing-accidentally-created-duplicate-files-through-a-mistaken-copy/
+#Finds files in the same directory with the same name albeit with a -copy appended. Will also verify checksum
+#modify $startPath to your desired location
 $startPath = "C:\users\BusinessUser\downloads"
 
 Write-Host "Scanning for duplicate '-copy' files in $RootPath..." -ForegroundColor Cyan
@@ -50,6 +52,11 @@ Get-ChildItem -Path $startPath -Recurse -File -Filter "* -copy.*" | ForEach-Obje
 
                 if ($Response -match '^[Yy]$') {
                     Remove-Item $CopyFile.FullName -Force
+                    #To Force Delete to recyclebin, comment out line 54 and uncomment the following 4 lines:
+                    #[Microsoft.VisualBasic.FileIO.FileSystem]::DeleteFile(
+                    #    $CopyFile.FullName,
+                    #    'Silent',
+                    #    'SendToRecycleBin')
                     Write-Host "Deleted: $($CopyFile.FullName)" -ForegroundColor Red
                 }
                 else {
