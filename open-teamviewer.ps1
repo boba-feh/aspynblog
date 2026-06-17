@@ -1,7 +1,7 @@
 param([string]$url)
 #Aspyn Information Services Customer TeamViewer Protocol Launcher Example
 
-$log = "C:\Users\Public\Applications\teamviewer-debug.log"
+$log = "C:\Users\Public\scripts\teamviewer-debug.log"
 
 function Write-Log($msg) {
     $time = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
